@@ -4,10 +4,11 @@ clc;
 
 % Open the ZED
 zed = webcam('ZED 2i');
+closePreview(zed);
 
 % LiDAR Initialization
 lidar = velodynelidar('VLP16');
-preview(lidar)
+%preview(lidar)
 
 % Set video resolution
 zed.Resolution = zed.AvailableResolutions{1};
@@ -39,20 +40,21 @@ while ok
     X = input("Enter keystroke: ", "s");
     if (X == "y")
         % Saving the Split Stereo Camera Images
-        f_name_l = append("img_left",tostring(counter),".jpg");
-        f_name_r = append("img_right",tostring(counter),".jpg");
+        f_name_l = append("img_left",string(counter),".jpg");
+        f_name_r = append("img_right",string(counter),".jpg");
         imwrite(image_left, f_name_l);
         imwrite(image_right, f_name_r);
 
         % Saving LiDAR data
-        lidar_data_filename = append("lidar_data", tostring(counter), ".mat");
+        lidar_data_filename = append("lidar_data", string(counter), ".mat");
         save(lidar_data_filename, 'frame', 'timestamp');
 
         counter = counter + 1;
-<<<<<<< HEAD
     end
-
-    % Display the left and right images
+    if (X == "n")
+        break;
+    end
+    %Display the left and right images
     subplot(1,2,1);
     imshow(image_left);
     title('Image Left');
@@ -62,34 +64,13 @@ while ok
     drawnow;
 
     % Check for interrupts
-    ok = ishandle(f);
+    %ok = ishandle(f);
 end
 
 % Close the camera and LiDAR instances
 clear zed;
-clear lidar;
-=======
-        % Start LiDAR Point Cloud acquisition
-        start(lidar);        
-        [frame,timestamp] = read(lidar,1);
-        stop(lidar)
-        save lidardata.mat frames timestamps
-        clear lidar
-      end
+clear li
 
-      % Display the left and right images
-      subplot(1,2,1);
-      imshow(image_left);
-      title('Image Left');
-      subplot(1,2,2);
-      imshow(image_right);
-      title('Image Right');
-      drawnow;
-
-      % Check for interrupts
-      ok = ishandle(f);
-  end
-
-  % close the camera instance
+    
+  %close the camera instance
   clear cam
->>>>>>> 40601365ff9314d01635807fb140bdce80e07adb
