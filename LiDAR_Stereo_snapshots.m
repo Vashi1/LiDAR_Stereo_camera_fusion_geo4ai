@@ -24,8 +24,8 @@ while ok
       image_right = img(:, width/2 +1: width, :);
       
       % Save the image on user prompt
-      X = input("Enter keystroke");
-      if (X == "p")
+      X = input("Enter keystroke: ", "s");
+      if (X == "y")
         % Saving the Split Stereo Camera Images
         f_name_l = append("img_left",tostring(counter),".jpg");
         f_name_r = append("img_right",tostring(counter),".jpg");
