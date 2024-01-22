@@ -29,7 +29,7 @@ while ok
         % Saving the Split Stereo Camera Images
         f_name_l = append("img_left",tostring(counter),".jpg");
         f_name_r = append("img_right",tostring(counter),".jpg");
-        imwrite(image_left, f_name_r);
+        imwrite(image_left, f_name_l);
         imwrite(image_right, f_name_r);
         counter = counter + 1;
         % Start LiDAR Point Cloud acquisition
