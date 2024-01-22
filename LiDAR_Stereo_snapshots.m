@@ -38,9 +38,6 @@ while ok
         stop(lidar)
         save lidardata.mat frames timestamps
         clear lidar
-
-
-
       end
 
       % Display the left and right images
