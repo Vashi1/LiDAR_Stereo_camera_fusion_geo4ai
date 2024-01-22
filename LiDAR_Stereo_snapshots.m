@@ -49,6 +49,7 @@ while ok
         save(lidar_data_filename, 'frame', 'timestamp');
 
         counter = counter + 1;
+<<<<<<< HEAD
     end
 
     % Display the left and right images
@@ -67,3 +68,28 @@ end
 % Close the camera and LiDAR instances
 clear zed;
 clear lidar;
+=======
+        % Start LiDAR Point Cloud acquisition
+        start(lidar);        
+        [frame,timestamp] = read(lidar,1);
+        stop(lidar)
+        save lidardata.mat frames timestamps
+        clear lidar
+      end
+
+      % Display the left and right images
+      subplot(1,2,1);
+      imshow(image_left);
+      title('Image Left');
+      subplot(1,2,2);
+      imshow(image_right);
+      title('Image Right');
+      drawnow;
+
+      % Check for interrupts
+      ok = ishandle(f);
+  end
+
+  % close the camera instance
+  clear cam
+>>>>>>> 40601365ff9314d01635807fb140bdce80e07adb
