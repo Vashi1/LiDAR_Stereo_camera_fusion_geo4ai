@@ -22,6 +22,7 @@ ok = 1;
 counter = 1;
 
 while ok
+<<<<<<< Updated upstream
     % Capture the current image
     img = snapshot(zed);
 
@@ -39,6 +40,26 @@ while ok
     % Save the images and LiDAR data on user prompt
     X = input("Enter keystroke: ", "s");
     if (X == "y")
+=======
+      % Capture the current image
+      img = snapshot(zed);   
+      
+      % Split the side by side image image into two images
+      image_left = img(:, 1 : width/2, :);
+      image_right = img(:, width/2 +1: width, :);
+     
+      % Display the left and right images
+      subplot(1,2,1);
+      imshow(image_left);
+      title('Image Left');
+      subplot(1,2,2);
+      imshow(image_right);
+      title('Image Right');
+      drawnow;
+      % Save the image on user prompt
+      X = input("Enter keystroke: ", "s");
+      if (X == "y")
+>>>>>>> Stashed changes
         % Saving the Split Stereo Camera Images
         f_name_l = append("img_left",string(counter),".jpg");
         f_name_r = append("img_right",string(counter),".jpg");
@@ -50,6 +71,7 @@ while ok
         save(lidar_data_filename, 'frame', 'timestamp');
 
         counter = counter + 1;
+<<<<<<< Updated upstream
     end
     if (X == "n")
         break;
@@ -70,6 +92,18 @@ end
 % Close the camera and LiDAR instances
 clear zed;
 clear li
+=======
+        % Start LiDAR Point Cloud acquisition
+        start(lidar);        
+        [frame,timestamp] = read(lidar,1);
+        stop(lidar)
+        save lidardata.mat frames timestamps
+        clear lidar
+      end
+      % Check for interrupts
+      ok = ishandle(f);
+  end
+>>>>>>> Stashed changes
 
     
   %close the camera instance
