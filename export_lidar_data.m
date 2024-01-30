@@ -1,4 +1,4 @@
-%Export Saved Point Clouddata
+z%Export Saved Point Clouddata
 clear all;
 clc;
 data = load('lidar_data5.mat', 'frame')
